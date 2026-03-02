@@ -22,3 +22,12 @@ jobs:
 
       - name: Ejecutar pruebas de humo
         run: newman run pruebas_humo_api.json
+
+      - name: Ejecutar pruebas con reporte
+        run: npm install -g newman-reporter-html
+            newman run pruebas_humo_api.json -r html --reporter-html-export reporte.html
+      - name: Subir reporte
+        uses: actions/upload-artifact@v4
+        with:
+          name: Reporte-Pruebas-Humo
+          path: reporte.html
